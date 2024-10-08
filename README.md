@@ -1,16 +1,22 @@
-# ecommerce
+# MoBooM
 
-A new Flutter project.
+MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.
 
-## Getting Started
+## App Screenshot
 
-This project is a starting point for a Flutter application.
+Here’s a glimpse of the app interface:
 
-A few resources to get you started if this is your first Flutter project:
+<div style="text-align: center;">
+  <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Moboom.jpg" alt="MoBooM Screenshot" width="600" style="border: 2px solid black;">
+</div>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### How to Run the App
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To run the app on your Android device, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/AdeebAbubacker/ecommerce_pro_plus
+   cd ecommerce_pro_plus
+   flutter run -d android
