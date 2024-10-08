@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DropdownButtons extends StatefulWidget {
   final List<CategoryItem> categoryItems;
@@ -32,8 +33,9 @@ class _DropdownButtonsState extends State<DropdownButtons> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 item.displayName, // Display the class name
-                style: const TextStyle(
-                  fontSize: 14,
+                style: GoogleFonts.poppins(
+                  fontSize: 11,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -68,7 +70,7 @@ class _DropdownButtonsState extends State<DropdownButtons> {
   Widget build(BuildContext context) {
     return Container(
       width: 190, // Use the full screen width
-      height: 40,
+      height: 50,
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
         color: const Color(0XFFFEFFFF),
@@ -84,9 +86,9 @@ class _DropdownButtonsState extends State<DropdownButtons> {
           isExpanded: true,
           hint: Text(
             widget.hinttext,
-            style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).hintColor,
+            style: GoogleFonts.poppins(
+              fontSize: 11,
+              color: const Color.fromARGB(255, 88, 88, 88),
             ),
           ),
           items: _addDividersAfterItems(widget.categoryItems),

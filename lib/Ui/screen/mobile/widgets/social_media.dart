@@ -1,42 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SocialMedia extends StatelessWidget {
   const SocialMedia({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return   Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [       const Row(
-                children: [
-                  Text("SOCIALS"),
-                  Spacer(),
-                  Text("PLATFORMS"),
-                ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            Text(
+              "SOCIALS",
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
               ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center, // Center the icons
-                children: [
-                  _buildSocialIcon(FontAwesomeIcons.facebookF),
-                  const SizedBox(width: 10),
-                  _buildSocialIcon(FontAwesomeIcons.twitter),
-                  const SizedBox(width: 10),
-                  _buildSocialIcon(FontAwesomeIcons.instagram),
-                  const SizedBox(width: 10),
-                  _buildSocialIcon(FontAwesomeIcons.tiktok),
-                  const SizedBox(width: 10),
-                  _buildSocialIcon(Icons.notifications),
-                  Spacer(),
-                  const Icon(FontAwesomeIcons.android),
-                  const SizedBox(width: 10),
-                  const Icon(FontAwesomeIcons.apple)
-                ],
-              )
-            ],);
+            ),
+            Spacer(),
+            Text(
+              "PLATFORMS",
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center, // Center the icons
+          children: [
+            _buildSocialIcon(FontAwesomeIcons.facebookF),
+            const SizedBox(width: 10),
+            _buildSocialIcon(FontAwesomeIcons.twitter),
+            const SizedBox(width: 10),
+            _buildSocialIcon(FontAwesomeIcons.instagram),
+            const SizedBox(width: 10),
+            _buildSocialIcon(FontAwesomeIcons.tiktok),
+            const SizedBox(width: 10),
+            _buildSocialIcon(Icons.notifications),
+            Spacer(),
+            const Icon(FontAwesomeIcons.android),
+            const SizedBox(width: 10),
+            const Icon(FontAwesomeIcons.apple)
+          ],
+        )
+      ],
+    );
   }
-   Widget _buildSocialIcon(IconData icon) {
+
+  Widget _buildSocialIcon(IconData icon) {
     return Container(
       padding: const EdgeInsets.all(8.0), // Padding around the icon
       decoration: const BoxDecoration(

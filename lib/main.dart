@@ -52,19 +52,46 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
-        backgroundColor: const Color(0XFFFFFFFF),
-        title: const Text(
-          'MoBooM',
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50.0), // Set your custom height
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white, // Pure white background
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1), // Subtle shadow color
+                spreadRadius: 2,
+                blurRadius: 6,
+                offset: const Offset(0, 3), // Small shadow below the AppBar
+              ),
+            ],
+          ),
+          child: AppBar(
+            leading: Image.asset(
+              "assets/menu_icon.png",
+              width: 4,
+              height: 4,
+            ),
+            backgroundColor: Colors.white, // Set AppBar color to white
+            foregroundColor: Colors.black, // Icon and text color
+            title: Image.asset(
+              "assets/moboom_logo.png",
+              width: 170,
+            ),
+            centerTitle: true,
+            elevation:
+                0, // Disable default elevation to avoid losing pure white
+
+            scrolledUnderElevation: 0,
+          ),
         ),
-        centerTitle: true,
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < 600) {
             // Mobile Layout
-            return  MobileScreen();
+            return MobileScreen();
           } else {
             // Web/Desktop Layout
             return const WebScreen();

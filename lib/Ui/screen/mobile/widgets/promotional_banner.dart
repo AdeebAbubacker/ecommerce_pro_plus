@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PromotionalBanner extends StatelessWidget {
   const PromotionalBanner({
@@ -21,18 +22,22 @@ class PromotionalBanner extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Title Text",
-              style: TextStyle(color: Colors.white),
+              style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16),
             ),
+            const SizedBox(height: 10),
             Text(
               "Slash Sales begins in April. Get up to 80 % Discount on all products Read More",
-              style: TextStyle(color: Colors.white),
+              style: GoogleFonts.poppins(color: Colors.white, fontSize: 14),
             ),
           ],
         ),
@@ -40,5 +45,3 @@ class PromotionalBanner extends StatelessWidget {
     );
   }
 }
-
-

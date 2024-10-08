@@ -12,7 +12,11 @@ class CategorySearchBloc
   CategorySearchBloc() : super(_Initial()) {
     on<_CategorySearch>((event, emit) async {
       emit(const CategorySearchState.loading());
-      final response = await ProductService.fetchProductsByCategory(event.query);
+      final response = await ProductService.fetchProductsByCategory(
+        category: event.query,
+        limit: 6,
+        page: 1,
+      );
 
       response.fold((failure) {
         emit(CategorySearchState.failure(failure.toString()));
