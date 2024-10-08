@@ -4,10 +4,10 @@ A new Flutter project.
 
 ## Getting Started
 
-# 📚 Burger App - Mobile App
+# 📚 MoBooM - Mobile App
 
 <div align="center">
-  <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/logo/app%20logo.png" alt="SchoolConnect Logo" width="200"/>
+  <img src="thttps://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Moboom.jpg" alt="SchoolConnect Logo" width="200"/>
   <p>MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.</p>
 </div>
 
@@ -17,18 +17,18 @@ A new Flutter project.
   <table>
     <tr>
       <td>
-        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204983.jpg" alt="Screen 1" width="200"/>
+        <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-16-355_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
       </td>
       <td>
-        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204984.jpg" alt="Screen 2" width="200"/>
+        <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-16-355_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
       </td>
     </tr>
     <tr>
       <td>
-        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204985.jpg" alt="Screen 3" width="200"/>
+       <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-16-355_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
       </td>
       <td>
-        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204986.jpg" alt="Screen 4" width="200"/>
+      <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-16-355_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
       </td>
     </tr>
   </table>
