@@ -383,7 +383,11 @@ class ProductSearchDelegate extends SearchDelegate {
             final products = value.getProducts.products ?? [];
             // Check if the list is null or empty
             if (products == null || products.isEmpty) {
-              return const Center(child: Text("Item Not Available"));
+              return Center(
+                  child: Text(
+                "Item Not Available",
+                style: TextStyles.poppins14Colorw400,
+              ));
             }
             return _buildListView(products, context);
           },

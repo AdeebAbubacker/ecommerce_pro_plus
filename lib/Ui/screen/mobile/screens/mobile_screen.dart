@@ -61,15 +61,7 @@ class _MobileScreenState extends State<MobileScreen> {
           initial: (value) {},
           loading: (value) {},
           success: (value) async {
-            // for (var i = 0; i < value.getProducts.length; i++) {
-            //   await all.put(
-            //     i,
-            //     CategoryDB(
-            //       name: value.getProducts[i].name, // Store name
-            //       slug: value.getProducts[i].slug.toString(), // Store slug
-            //     ),
-            //   );
-            // } // Now let's print the contents of the Hive box
+      
             await CategoryBox.clear();
             // First, store the static "All" entry
             await CategoryBox.put(
