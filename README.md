@@ -1,14 +1,40 @@
 # MoBooM
 
-MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.
+A new Flutter project.
 
-## App Screenshot
+## Getting Started
 
-Here’s a glimpse of the app interface:
+# 📚 MoBooM - Mobile App
 
-<div style="text-align: center;">
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Moboom.jpg" alt="MoBooM Screenshot" width="600" style="border: 2px solid black;">
+<div align="center">
+  <img src="thttps://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Moboom.jpg" alt="SchoolConnect Logo" width="200"/>
+  <p>MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.</p>
 </div>
+
+## App Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-16-355_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
+      </td>
+      <td>
+        <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-22-027_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-35-207_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
+      </td>
+      <td>
+      <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Screenshot_2024-10-08-16-09-16-355_com.example.ecommerce.jpg" alt="Screen 1" width="200"/>
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
 
 ### How to Run the App
 
