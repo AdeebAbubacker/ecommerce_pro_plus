@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       BlocProvider.of<ProductscategoryBloc>(context)
           .add(const ProductscategoryEvent.getProductsCategory());
     });
@@ -64,15 +64,36 @@ class _SplashScreenState extends State<SplashScreen>
           initial: (value) {},
           loading: (value) {},
           success: (value) async {
+            // for (var i = 0; i < value.getProducts.length; i++) {
+            //   await CategoryBox.put(
+            //     i,
+            //     CategoryDB(
+            //       name: value.getProducts[i].name, // Store name
+            //       slug: value.getProducts[i].slug.toString(), // Store slug
+            //     ),
+            //   );
+            // } // Now let's print the contents of the Hive box
+            await CategoryBox.clear();
+            // First, store the static "All" entry
+            await CategoryBox.put(
+              0, // index 0 for the static "All" value
+              CategoryDB(
+                name: "All", // Static name
+                slug: "All", // Static slug or any value you'd prefer
+              ),
+            );
+
+// Then, store the dynamic products
             for (var i = 0; i < value.getProducts.length; i++) {
               await CategoryBox.put(
-                i,
+                i + 1, // Adjust the index by adding 1 to account for the "All" entry
                 CategoryDB(
                   name: value.getProducts[i].name, // Store name
                   slug: value.getProducts[i].slug.toString(), // Store slug
                 ),
               );
-            } // Now let's print the contents of the Hive box
+            }
+
             print("Stored categories in Hive DB:");
 
             for (var i = 0; i < CategoryBox.length; i++) {
@@ -80,9 +101,11 @@ class _SplashScreenState extends State<SplashScreen>
               print(
                   'Category $i: Name - ${category?.name}, Slug - ${category?.slug}');
             }
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const MyHomePage();
-            },));
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) {
+                return const MyHomePage();
+              },
+            ));
           },
         );
       },
