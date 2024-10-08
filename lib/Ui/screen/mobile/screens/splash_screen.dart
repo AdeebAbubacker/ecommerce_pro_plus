@@ -152,7 +152,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   List<TextSpan> _buildModernAnimatedText() {
-    final List<String> textParts = ['M', 'oBo', 'om', 'B'];
+    final List<String> textParts = ['M', 'oBo', '0', 'M'];
     final List<Color> textColors = [
       Colors.pink,
       Colors.black,
