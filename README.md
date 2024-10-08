@@ -7,7 +7,7 @@ A new Flutter project.
 # 📚 MoBooM - Mobile App
 
 <div align="center">
-  <img src="thttps://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Moboom.jpg" alt="SchoolConnect Logo" width="200"/>
+  <img src="thttps://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Moboom.jpg" width="200"/>
   <p>MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.</p>
 </div>
 
