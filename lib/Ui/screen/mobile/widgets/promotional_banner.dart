@@ -35,10 +35,23 @@ class PromotionalBanner extends StatelessWidget {
                   fontSize: 16),
             ),
             const SizedBox(height: 10),
-            Text(
-              "Slash Sales begins in April. Get up to 80 % Discount on all products Read More",
-              style: GoogleFonts.poppins(color: Colors.white, fontSize: 14),
-            ),
+            RichText(
+              text: TextSpan(
+                text:
+                    "Slash Sales begins in April. Get up to 80 % Discount on all products ", 
+                style: GoogleFonts.poppins(color: Colors.white, fontSize: 14),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: "Read More", 
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

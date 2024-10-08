@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:ecommerce/Ui/screen/mobile/screens/mobile_screen.dart';
 import 'package:ecommerce/core/db/hive_db/adapters/category_adater/category_adapter.dart';
 import 'package:ecommerce/core/db/hive_db/boxes/category_box.dart';
 import 'package:ecommerce/core/view_model/productCategory/productscategory_bloc.dart';
@@ -30,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
       BlocProvider.of<ProductscategoryBloc>(context)
           .add(const ProductscategoryEvent.getProductsCategory());
       Future.delayed(
-        Duration(seconds: 3),
+        const Duration(seconds: 3),
         () {
             Navigator.pushAndRemoveUntil(
             context,
@@ -39,18 +38,18 @@ class _SplashScreenState extends State<SplashScreen>
                 return const MyHomePage();
               },
             ),
-            (route) => false, // This will remove all previous routes from the stack
+            (route) => false, 
           );
         },
       );
     });
-    // Initialize the animation controller
+  
     _controller = AnimationController(
       duration: const Duration(milliseconds: 2500),
       vsync: this,
     )..forward();
 
-    // Create fade, scale, and rotation animations
+   
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeIn),
     );
@@ -78,32 +77,24 @@ class _SplashScreenState extends State<SplashScreen>
           initial: (value) {},
           loading: (value) {},
           success: (value) async {
-            // for (var i = 0; i < value.getProducts.length; i++) {
-            //   await CategoryBox.put(
-            //     i,
-            //     CategoryDB(
-            //       name: value.getProducts[i].name, // Store name
-            //       slug: value.getProducts[i].slug.toString(), // Store slug
-            //     ),
-            //   );
-            // } // Now let's print the contents of the Hive box
+
             await CategoryBox.clear();
-            // First, store the static "All" entry
+           
             await CategoryBox.put(
-              0, // index 0 for the static "All" value
+              0, 
               CategoryDB(
-                name: "All", // Static name
-                slug: "All", // Static slug or any value you'd prefer
+                name: "All", 
+                slug: "All", 
               ),
             );
 
-// Then, store the dynamic products
+
             for (var i = 0; i < value.getProducts.length; i++) {
               await CategoryBox.put(
-                i + 1, // Adjust the index by adding 1 to account for the "All" entry
+                i + 1, 
                 CategoryDB(
-                  name: value.getProducts[i].name, // Store name
-                  slug: value.getProducts[i].slug.toString(), // Store slug
+                  name: value.getProducts[i].name, 
+                  slug: value.getProducts[i].slug.toString(), 
                 ),
               );
             }
@@ -112,8 +103,7 @@ class _SplashScreenState extends State<SplashScreen>
 
             for (var i = 0; i < CategoryBox.length; i++) {
               final category = CategoryBox.get(i);
-              print(
-                  'Category $i: Name - ${category?.name}, Slug - ${category?.slug}');
+             
             }
           },
         );
@@ -152,7 +142,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   List<TextSpan> _buildModernAnimatedText() {
-    final List<String> textParts = ['M', 'oBo', '0', 'M'];
+    final List<String> textParts = ['M', 'oBo', 'o', 'M'];
     final List<Color> textColors = [
       Colors.pink,
       Colors.black,
@@ -164,7 +154,7 @@ class _SplashScreenState extends State<SplashScreen>
       return TextSpan(
         text: textParts[index],
         style: GoogleFonts.poppins(
-          fontSize: 48, // Consistent font size
+          fontSize: 48, 
           fontWeight: FontWeight.bold,
           color: textColors[index],
         ),

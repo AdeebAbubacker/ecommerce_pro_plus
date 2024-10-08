@@ -32,7 +32,7 @@ class SocialMedia extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center, // Center the icons
+          mainAxisAlignment: MainAxisAlignment.center, 
           children: [
             _buildSocialIcon(FontAwesomeIcons.facebookF),
             const SizedBox(width: 10),
@@ -46,14 +46,14 @@ class SocialMedia extends StatelessWidget {
             Spacer(),
             SvgPicture.asset(
               "assets/android.svg",
-              width: 25, // Adjust the width as per your design
-              height: 25, // Adjust the height as per your design
+              width: 25, 
+              height: 25, 
             ),
             const SizedBox(width: 10),
             SvgPicture.asset(
               "assets/apple.svg",
-              width: 25, // Adjust the width as per your design
-              height: 25, // Adjust the height as per your design
+              width: 25, 
+              height: 25, 
             ),
           ],
         )
@@ -63,15 +63,15 @@ class SocialMedia extends StatelessWidget {
 
   Widget _buildSocialIcon(IconData icon) {
     return Container(
-      padding: const EdgeInsets.all(8.0), // Padding around the icon
+      padding: const EdgeInsets.all(8.0), 
       decoration: const BoxDecoration(
-        shape: BoxShape.circle, // Makes the container circular
-        color: Colors.black, // Background color (black)
+        shape: BoxShape.circle, 
+        color: Colors.black, 
       ),
       child: Icon(
         icon,
-        color: Colors.white, // Icon color (white)
-        size: 13.0, // Icon size
+        color: Colors.white, 
+        size: 13.0, 
       ),
     );
   }

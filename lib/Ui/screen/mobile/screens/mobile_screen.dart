@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'dart:async';
-
+import 'package:device_preview/device_preview.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/promotional_banner.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/search_button.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/signup.dart';
@@ -169,22 +169,22 @@ class _MobileScreenState extends State<MobileScreen> {
                       return const Text("Error");
                     },
                     failure: (value) {
-                      print(value);
+                    
                       return const Text("Error");
                     },
                     initial: (value) {
-                      print(value);
+                    
                       return const Text("Error");
                     },
                     success: (value) {
-                      print(value);
+                    
                       // Ensure total is not null
                       int totalItems = value.categorySearch.total ??
                           0; // Use a default value of 0 if null
                       int itemsPerPage = 6;
                       int totalPages = (totalItems / itemsPerPage)
                           .ceil(); // Calculate total pages
-                      print('totalpage ${totalPages}');
+                  
                       return Column(children: [
                         GridView.builder(
                           padding: const EdgeInsets.all(0),
@@ -219,7 +219,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                           decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(
-                                                  10), // Adjust the radius as needed
+                                                  10), 
                                               topRight: Radius.circular(9),
                                             ),
                                           ),
@@ -227,7 +227,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                               borderRadius:
                                                   const BorderRadius.only(
                                                 topLeft: Radius.circular(
-                                                    10), // Match the container's radius
+                                                    10), 
                                                 topRight: Radius.circular(9),
                                               ),
                                               child: Image.network(
@@ -244,7 +244,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                                     height: 190,
                                                     width: double.infinity,
                                                     color: Colors.grey[
-                                                        200], // Background color if image fails
+                                                        200], 
                                                     child: const Icon(
                                                       Icons.broken_image,
                                                       size: 50,
@@ -257,9 +257,9 @@ class _MobileScreenState extends State<MobileScreen> {
                                         ),
                                         Positioned(
                                           top:
-                                              8, // Adjust the distance from the top
+                                              8,
                                           right:
-                                              8, // Adjust the distance from the right
+                                              8, 
                                           child: Container(
                                               color: const Color.fromARGB(
                                                   172, 199, 199, 199),
@@ -326,9 +326,9 @@ class _MobileScreenState extends State<MobileScreen> {
                                                           .rating!
                                                           .floor()
                                                   ? Colors
-                                                      .amber // Full star (amber) for the integer part of the rating
+                                                      .amber 
                                                   : Colors
-                                                      .grey, // Grey star for the remaining part
+                                                      .grey, 
                                               size: 10,
                                             );
                                           }),
@@ -346,7 +346,7 @@ class _MobileScreenState extends State<MobileScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              // Previous Button
+                            
                               IconButton(
                                   onPressed: currentPage > 1
                                       ? () {
@@ -389,17 +389,17 @@ class _MobileScreenState extends State<MobileScreen> {
 
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white, // Background color
+                                  color: Colors.white, 
                                   border: Border.all(
-                                    color: Colors.black, // Border color
-                                    width: 1.0, // Border width
+                                    color: Colors.black, 
+                                    width: 1.0, 
                                   ),
                                   borderRadius: BorderRadius.circular(
-                                      2.0), // Optional: Rounded corners
+                                      2.0), 
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: Text('${currentPage.toString()}'),
+                                  child: Text(currentPage.toString()),
                                 ),
                               ),
                               Padding(
@@ -417,10 +417,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                       ? () {
                                           setState(() {
                                             currentPage++;
-                                            print(
-                                                'Current page ${currentPage}');
-                                            print(
-                                                'query ${selectedArmedForces?.slug}');
+                                         
                                             BlocProvider.of<CategorySearchBloc>(
                                                     context)
                                                 .add(
@@ -433,16 +430,16 @@ class _MobileScreenState extends State<MobileScreen> {
                                               ),
                                             );
                                           });
-                                          // Call the Bloc event with the next page
+                        
                                         }
-                                      : null, // Disable if on the last page
+                                      : null,
                                   icon: const Icon(Icons.arrow_forward_ios)),
                             ],
                           ),
                       ]);
                     },
                     loading: (value) {
-                      print(value);
+                    
                       return GridView.builder(
                         padding: const EdgeInsets.all(0),
                         physics: const NeverScrollableScrollPhysics(),
@@ -450,12 +447,12 @@ class _MobileScreenState extends State<MobileScreen> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount:
-                              2, // Adjust the number of columns as needed
+                              2, 
                           mainAxisSpacing: 10,
                           crossAxisSpacing: 10,
                           childAspectRatio: 6 / 12,
                         ),
-                        itemCount: 6, // Shimmer effect item count
+                        itemCount: 6, 
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
                             height: 390,
@@ -466,7 +463,7 @@ class _MobileScreenState extends State<MobileScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Shimmer effect for the image section
+                             
                                 Shimmer.fromColors(
                                   baseColor:
                                       const Color.fromARGB(255, 238, 238, 238),
@@ -489,7 +486,6 @@ class _MobileScreenState extends State<MobileScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      // Shimmer effect for the title
                                       Shimmer.fromColors(
                                         baseColor: const Color.fromARGB(
                                             255, 245, 244, 244),
@@ -504,7 +500,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                       ),
                                       const SizedBox(height: 10),
 
-                                      // Shimmer effect for the description
+                                 
                                       Shimmer.fromColors(
                                         baseColor: const Color.fromARGB(
                                             255, 245, 244, 244),
@@ -517,7 +513,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                       ),
                                       const SizedBox(height: 5),
 
-                                      // Shimmer effect for the price
+                                 
                                       Shimmer.fromColors(
                                         baseColor: const Color.fromARGB(
                                             255, 245, 244, 244),
@@ -530,7 +526,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                       ),
                                       const SizedBox(height: 5),
 
-                                      // Shimmer effect for the stars
+                                
                                       Row(
                                         children: List.generate(5, (starIndex) {
                                           return Shimmer.fromColors(
@@ -556,7 +552,7 @@ class _MobileScreenState extends State<MobileScreen> {
                       );
                     },
                     noInternet: (value) {
-                      print(value);
+                    
                       return Center(
                           child: SizedBox(
                               height: 200,

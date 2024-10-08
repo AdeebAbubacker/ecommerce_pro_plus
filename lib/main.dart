@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:ecommerce/Ui/screen/mobile/screens/mobile_screen.dart';
 import 'package:ecommerce/Ui/screen/mobile/screens/splash_screen.dart';
 import 'package:ecommerce/Ui/screen/web/web_screen.dart';
@@ -23,9 +24,18 @@ void main() async {
   ///----------------lock in portrait mode-----------------------------------
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    //  runApp(const MyApp());
+      runApp(const MyApp());
+// runApp(
+//     DevicePreview(
+//       enabled: true,
+//       tools: const [
+//         ...DevicePreview.defaultTools,
 
-    runApp(MyApp());
+//       ],
+//       builder: (context) => const MyApp(),
+//     ),
+// );
+    // runApp(MyApp());
   });
 }
 

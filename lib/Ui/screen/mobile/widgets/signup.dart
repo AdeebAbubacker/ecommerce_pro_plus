@@ -22,25 +22,25 @@ class Signup extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         SizedBox(
-          width: double.infinity, // Maximum width
+          width: double.infinity, 
           height: 50,
           child: ElevatedButton(
             onPressed: () {
-              // Handle subscribe action here
+            
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black, // Black background color
+              backgroundColor: Colors.black, 
               padding:
-                  const EdgeInsets.symmetric(vertical: 2.0), // Button height
+                  const EdgeInsets.symmetric(vertical: 2.0), 
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0), // Rectangular shape
+                borderRadius: BorderRadius.circular(5.0), 
               ),
             ),
             child: const Text(
               'SUBSCRIBE',
               style: TextStyle(
                 fontSize: 16.0,
-                color: Colors.white, // White text color for contrast
+                color: Colors.white, 
               ),
             ),
           ),
@@ -48,18 +48,18 @@ class Signup extends StatelessWidget {
         const SizedBox(height: 30),
         Center(
           child: RichText(
-            textAlign: TextAlign.center, // Align the text to the center
+            textAlign: TextAlign.center, 
             text: const TextSpan(
               text:
                   'By Clicking the SUBSCRIBE button, you are agreeing to our ',
               style: TextStyle(
-                color: Colors.grey, // Set the general text to grey
+                color: Colors.grey, 
               ),
               children: [
                 TextSpan(
                   text: 'privacy & Cookie Policy',
                   style: TextStyle(
-                    color: Colors.blue, // Set the link text to blue
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -74,55 +74,55 @@ class Signup extends StatelessWidget {
         const SizedBox(height: 50),
         const Center(
           child: Wrap(
-            alignment: WrapAlignment.center, // Center align the items
-            spacing: 5.0, // Space between items in the wrap
+            alignment: WrapAlignment.center, 
+            spacing: 5.0,
             children: [
               Text(
                 "Privacy Center",
                 style: TextStyle(
-                  color: Colors.grey, // Grey text color
-                  decoration: TextDecoration.underline, // Underline
-                  decorationColor: Colors.grey, // Grey underline
+                  color: Colors.grey, 
+                  decoration: TextDecoration.underline, 
+                  decorationColor: Colors.grey, 
                 ),
               ),
               Text(
                 "Privacy & Cookie Policy",
                 style: TextStyle(
-                  color: Colors.grey, // Grey text color
-                  decoration: TextDecoration.underline, // Underline
-                  decorationColor: Colors.grey, // Grey underline
+                  color: Colors.grey, 
+                  decoration: TextDecoration.underline, 
+                  decorationColor: Colors.grey, 
                 ),
               ),
               Text(
                 "Manage Cookies",
                 style: TextStyle(
-                  color: Colors.grey, // Grey text color
-                  decoration: TextDecoration.underline, // Underline
-                  decorationColor: Colors.grey, // Grey underline
+                  color: Colors.grey, 
+                  decoration: TextDecoration.underline, 
+                  decorationColor: Colors.grey, 
                 ),
               ),
               Text(
                 "Terms & Conditions",
                 style: TextStyle(
-                  color: Colors.grey, // Grey text color
-                  decoration: TextDecoration.underline, // Underline
-                  decorationColor: Colors.grey, // Grey underline
+                  color: Colors.grey, 
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.grey,
                 ),
               ),
               Text(
                 "Copyright Notice",
                 style: TextStyle(
-                  color: Colors.grey, // Grey text color
-                  decoration: TextDecoration.underline, // Underline
-                  decorationColor: Colors.grey, // Grey underline
+                  color: Colors.grey, 
+                  decoration: TextDecoration.underline, 
+                  decorationColor: Colors.grey, 
                 ),
               ),
               Text(
                 "Imprint",
                 style: TextStyle(
-                  color: Colors.grey, // Grey text color
-                  decoration: TextDecoration.underline, // Underline
-                  decorationColor: Colors.grey, // Grey underline
+                  color: Colors.grey, 
+                  decoration: TextDecoration.underline, 
+                  decorationColor: Colors.grey, 
                 ),
               ),
             ],

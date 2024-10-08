@@ -24,8 +24,8 @@ class SearchButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(7),
           border: Border.all(
             color:
-                const Color.fromARGB(255, 198, 198, 198), // Add a grey border
-            width: 1, // Set the thickness of the border
+                const Color.fromARGB(255, 198, 198, 198), 
+            width: 1, 
           ),
         ),
         child: Row(
