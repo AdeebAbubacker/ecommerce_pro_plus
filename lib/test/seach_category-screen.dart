@@ -90,7 +90,10 @@ class SeachCategoryscreen extends StatelessWidget {
           ElevatedButton(
             onPressed: () async {
               BlocProvider.of<CategorySearchBloc>(context)
-                  .add(CategorySearchEvent.categorySearch(query: 'phone'));
+                  .add(CategorySearchEvent.categorySearch(
+                query: 'phone',
+                page: 1,
+              ));
             },
             child: const Text("Get Products"),
           ),

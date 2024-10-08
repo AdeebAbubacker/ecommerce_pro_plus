@@ -19,19 +19,19 @@ mixin _$CategorySearchEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String query) categorySearch,
+    required TResult Function(String query, int page) categorySearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String query)? categorySearch,
+    TResult? Function(String query, int page)? categorySearch,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String query)? categorySearch,
+    TResult Function(String query, int page)? categorySearch,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +119,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String query) categorySearch,
+    required TResult Function(String query, int page) categorySearch,
   }) {
     return started();
   }
@@ -128,7 +128,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String query)? categorySearch,
+    TResult? Function(String query, int page)? categorySearch,
   }) {
     return started?.call();
   }
@@ -137,7 +137,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String query)? categorySearch,
+    TResult Function(String query, int page)? categorySearch,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -188,7 +188,7 @@ abstract class _$$CategorySearchImplCopyWith<$Res> {
           $Res Function(_$CategorySearchImpl) then) =
       __$$CategorySearchImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String query});
+  $Res call({String query, int page});
 }
 
 /// @nodoc
@@ -205,12 +205,17 @@ class __$$CategorySearchImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? query = null,
+    Object? page = null,
   }) {
     return _then(_$CategorySearchImpl(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -218,14 +223,16 @@ class __$$CategorySearchImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CategorySearchImpl implements _CategorySearch {
-  const _$CategorySearchImpl({required this.query});
+  const _$CategorySearchImpl({required this.query, required this.page});
 
   @override
   final String query;
+  @override
+  final int page;
 
   @override
   String toString() {
-    return 'CategorySearchEvent.categorySearch(query: $query)';
+    return 'CategorySearchEvent.categorySearch(query: $query, page: $page)';
   }
 
   @override
@@ -233,11 +240,12 @@ class _$CategorySearchImpl implements _CategorySearch {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CategorySearchImpl &&
-            (identical(other.query, query) || other.query == query));
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query);
+  int get hashCode => Object.hash(runtimeType, query, page);
 
   /// Create a copy of CategorySearchEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -252,29 +260,29 @@ class _$CategorySearchImpl implements _CategorySearch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(String query) categorySearch,
+    required TResult Function(String query, int page) categorySearch,
   }) {
-    return categorySearch(query);
+    return categorySearch(query, page);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(String query)? categorySearch,
+    TResult? Function(String query, int page)? categorySearch,
   }) {
-    return categorySearch?.call(query);
+    return categorySearch?.call(query, page);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(String query)? categorySearch,
+    TResult Function(String query, int page)? categorySearch,
     required TResult orElse(),
   }) {
     if (categorySearch != null) {
-      return categorySearch(query);
+      return categorySearch(query, page);
     }
     return orElse();
   }
@@ -312,10 +320,12 @@ class _$CategorySearchImpl implements _CategorySearch {
 }
 
 abstract class _CategorySearch implements CategorySearchEvent {
-  const factory _CategorySearch({required final String query}) =
-      _$CategorySearchImpl;
+  const factory _CategorySearch(
+      {required final String query,
+      required final int page}) = _$CategorySearchImpl;
 
   String get query;
+  int get page;
 
   /// Create a copy of CategorySearchEvent
   /// with the given fields replaced by the non-null parameter values.

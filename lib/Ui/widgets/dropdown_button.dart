@@ -124,9 +124,22 @@ class CategoryItem {
   final String displayName;
   final String id;
   final String slug;
+
   CategoryItem({
     required this.displayName,
     required this.id,
     required this.slug,
   });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is CategoryItem &&
+        other.id == id &&
+        other.slug == slug;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ slug.hashCode;
 }

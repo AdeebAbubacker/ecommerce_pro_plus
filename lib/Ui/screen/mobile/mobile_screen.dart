@@ -9,6 +9,7 @@ import 'package:ecommerce/core/view_model/categorySearch/category_search_bloc.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MobileScreen extends StatefulWidget {
   const MobileScreen({super.key});
@@ -27,10 +28,15 @@ class _MobileScreenState extends State<MobileScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       BlocProvider.of<CategorySearchBloc>(context)
-          .add(const CategorySearchEvent.categorySearch(query: "All"));
+          .add(const CategorySearchEvent.categorySearch(
+        query: "All",
+        page: 1,
+      ));
     });
   }
 
+  int currentPage = 1; // Track the current page
+  int totalPages = 1; // Track total pages
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -136,10 +142,13 @@ class _MobileScreenState extends State<MobileScreen> {
                   ],
                   onClassChanged: (CategoryItem? selectedItem) {
                     selectedArmedForces = selectedItem;
+                    currentPage = 1;
                     print(selectedArmedForces?.displayName);
-                    BlocProvider.of<CategorySearchBloc>(context).add(
-                        CategorySearchEvent.categorySearch(
-                            query: selectedArmedForces!.slug));
+                    BlocProvider.of<CategorySearchBloc>(context)
+                        .add(CategorySearchEvent.categorySearch(
+                      query: selectedArmedForces!.slug,
+                      page: 1,
+                    ));
                   },
                   hinttext: 'Select Category',
                 ),
@@ -168,6 +177,211 @@ class _MobileScreenState extends State<MobileScreen> {
                     int totalPages = (totalItems / itemsPerPage)
                         .ceil(); // Calculate total pages
                     print('totalpage ${totalPages}');
+                    return Column(children: [
+                      GridView.builder(
+                        padding: const EdgeInsets.all(0),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              2, // Adjust the number of columns as needed
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 6 / 12,
+                        ),
+                        itemCount: value.categorySearch.products?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            height: 390,
+
+                            // Adjust the margin as needed
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.grey),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 190,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(
+                                                10), // Adjust the radius as needed
+                                            topRight: Radius.circular(9),
+                                          ),
+                                        ),
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(
+                                                  10), // Match the container's radius
+                                              topRight: Radius.circular(9),
+                                            ),
+                                            child: Image.network(
+                                              '${value.categorySearch.products![index].images![0]}',
+                                              height: 190,
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Container(
+                                                  height: 190,
+                                                  width: double.infinity,
+                                                  color: Colors.grey[
+                                                      200], // Background color if image fails
+                                                  child: const Icon(
+                                                    Icons.broken_image,
+                                                    size: 50,
+                                                    color: Colors
+                                                        .grey, // Icon color
+                                                  ),
+                                                );
+                                              },
+                                            )),
+                                      ),
+                                      Positioned(
+                                        top:
+                                            8, // Adjust the distance from the top
+                                        right:
+                                            8, // Adjust the distance from the right
+                                        child: Container(
+                                            color: const Color.fromARGB(
+                                                172, 199, 199, 199),
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child:
+                                                  Icon(Icons.favorite_border),
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        value.categorySearch.products![index]
+                                            .title
+                                            .toString(),
+                                        style: GoogleFonts.poppins(
+                                          color: const Color.fromARGB(
+                                              255, 88, 88, 88),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        value.categorySearch.products![index]
+                                                    .description!.length >
+                                                20
+                                            ? '${value.categorySearch.products![index].description.toString().substring(0, 30)}...'
+                                            : value.categorySearch
+                                                .products![index].description
+                                                .toString(),
+                                        style: GoogleFonts.poppins(
+                                          color: const Color.fromARGB(
+                                              255, 138, 138, 138),
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        '\$ ${value.categorySearch.products![index].price}',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: List.generate(5, (starIndex) {
+                                          return Icon(
+                                            Icons.star,
+                                            color: starIndex <
+                                                    value
+                                                        .categorySearch
+                                                        .products![index]
+                                                        .rating!
+                                                        .floor()
+                                                ? Colors
+                                                    .amber // Full star (amber) for the integer part of the rating
+                                                : Colors
+                                                    .grey, // Grey star for the remaining part
+                                            size: 10,
+                                          );
+                                        }),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      if (totalPages > 1)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Previous Button
+                            IconButton(
+                                onPressed: currentPage > 1
+                                    ? () {
+                                        setState(() {
+                                          currentPage--;
+                                        });
+                                        // Call the Bloc event with the previous page
+                                        BlocProvider.of<CategorySearchBloc>(
+                                                context)
+                                            .add(
+                                          CategorySearchEvent.categorySearch(
+                                            query: selectedArmedForces?.slug ?? "All",
+                                            page: currentPage,
+                                          ),
+                                        );
+                                      }
+                                    : null,
+                                icon: Icon(Icons.arrow_back_ios)),
+
+                            // Page Indicator
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: Text("Page $currentPage of $totalPages"),
+                            ),
+
+                            // Next Button
+                            IconButton(
+                                onPressed: currentPage < totalPages
+                                    ? () {
+                                        setState(() {
+                                          currentPage++;
+                                        });
+                                        // Call the Bloc event with the next page
+                                        BlocProvider.of<CategorySearchBloc>(
+                                                context)
+                                            .add(
+                                          CategorySearchEvent.categorySearch(
+                                            query: selectedArmedForces?.slug ?? "All",
+                                            page: currentPage,
+                                          ),
+                                        );
+                                      }
+                                    : null, // Disable if on the last page
+                                icon: Icon(Icons.arrow_forward_ios)),
+                          ],
+                        ),
+                    ]);
+                  },
+                  loading: (value) {
                     return GridView.builder(
                       padding: const EdgeInsets.all(0),
                       physics: const NeverScrollableScrollPhysics(),
@@ -180,59 +394,32 @@ class _MobileScreenState extends State<MobileScreen> {
                         crossAxisSpacing: 10,
                         childAspectRatio: 6 / 12,
                       ),
-                      itemCount: 10,
+                      itemCount: 6, // Shimmer effect item count
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           height: 390,
-
-                          // Adjust the margin as needed
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.grey),
+                            color: const Color.fromARGB(255, 255, 255, 255),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: 190,
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(
-                                              10), // Adjust the radius as needed
-                                          topRight: Radius.circular(9),
-                                        ),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(
-                                              10), // Match the container's radius
-                                          topRight: Radius.circular(9),
-                                        ),
-                                        child: Image.asset(
-                                          'assets/image-1.jpg',
-                                          height: 190,
-                                          width: double.infinity,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                              // Shimmer effect for the image section
+                              Shimmer.fromColors(
+                                baseColor:
+                                    const Color.fromARGB(255, 238, 238, 238),
+                                highlightColor: Colors.grey.shade200,
+                                child: Container(
+                                  height: 190,
+                                  width: double.infinity,
+                                  decoration: const BoxDecoration(
+                                    color: Color.fromARGB(255, 251, 251, 251),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(9),
                                     ),
-                                    Positioned(
-                                      top:
-                                          8, // Adjust the distance from the top
-                                      right:
-                                          8, // Adjust the distance from the right
-                                      child: Container(
-                                          color: const Color.fromARGB(
-                                              44, 255, 255, 255),
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Icon(Icons.favorite_border),
-                                          )),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -240,61 +427,62 @@ class _MobileScreenState extends State<MobileScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'Nike Air Jordan',
-                                      style: GoogleFonts.poppins(
+                                    // Shimmer effect for the title
+                                    Shimmer.fromColors(
+                                      baseColor: const Color.fromARGB(
+                                          255, 245, 244, 244),
+                                      highlightColor: const Color.fromARGB(
+                                          255, 245, 245, 245),
+                                      child: Container(
+                                        height: 12,
+                                        width: 100,
                                         color: const Color.fromARGB(
-                                            255, 88, 88, 88),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
+                                            255, 253, 253, 253),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+
+                                    // Shimmer effect for the description
+                                    Shimmer.fromColors(
+                                      baseColor: const Color.fromARGB(
+                                          255, 245, 244, 244),
+                                      highlightColor: Colors.grey.shade200,
+                                      child: Container(
+                                        height: 10,
+                                        width: 150,
+                                        color: Colors.grey[300],
                                       ),
                                     ),
                                     const SizedBox(height: 5),
-                                    Text(
-                                      'Product Description: Lorem Ipsum, some text comes here...',
-                                      style: GoogleFonts.poppins(
-                                        color: const Color.fromARGB(
-                                            255, 138, 138, 138),
-                                        fontSize: 10,
+
+                                    // Shimmer effect for the price
+                                    Shimmer.fromColors(
+                                      baseColor: const Color.fromARGB(
+                                          255, 245, 244, 244),
+                                      highlightColor: Colors.grey.shade200,
+                                      child: Container(
+                                        height: 16,
+                                        width: 50,
+                                        color: Colors.grey[300],
                                       ),
                                     ),
                                     const SizedBox(height: 5),
-                                    const Text(
-                                      '\$120.23',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
+                                    // Shimmer effect for the stars
+                                    Row(
+                                      children: List.generate(5, (starIndex) {
+                                        return Shimmer.fromColors(
+                                          baseColor: const Color.fromARGB(
+                                              255, 245, 244, 244),
+                                          highlightColor: Colors.grey.shade200,
+                                          child: Icon(
+                                            Icons.star,
+                                            color: Colors.grey.shade300,
+                                            size: 10,
+                                          ),
+                                        );
+                                      }),
                                     ),
-                                    const Row(
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                          size: 10,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                          size: 10,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                          size: 10,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                          size: 10,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.grey,
-                                          size: 10,
-                                        ),
-                                      ],
-                                    )
                                   ],
                                 ),
                               ),
@@ -303,9 +491,6 @@ class _MobileScreenState extends State<MobileScreen> {
                         );
                       },
                     );
-                  },
-                  loading: (value) {
-                    return const CircularProgressIndicator(); // Show loading indicator
                   },
                 );
               },

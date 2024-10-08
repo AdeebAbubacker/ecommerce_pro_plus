@@ -15,7 +15,7 @@ class CategorySearchBloc
       final response = await ProductService.fetchProductsByCategory(
         category: event.query,
         limit: 6,
-        page: 1,
+        page: event.page,
       );
 
       response.fold((failure) {
