@@ -1,14 +1,40 @@
 # MoBooM
 
-MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.
+A new Flutter project.
 
-## App Screenshot
+## Getting Started
 
-Here’s a glimpse of the app interface:
+# 📚 Burger App - Mobile App
 
-<div style="text-align: center;">
-  <img src="https://raw.githubusercontent.com/AdeebAbubacker/ecommerce_pro_plus/refs/heads/main/assets/Moboom.jpg" alt="MoBooM Screenshot" width="600" style="border: 2px solid black;">
+<div align="center">
+  <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/logo/app%20logo.png" alt="SchoolConnect Logo" width="200"/>
+  <p>MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.</p>
 </div>
+
+## App Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204983.jpg" alt="Screen 1" width="200"/>
+      </td>
+      <td>
+        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204984.jpg" alt="Screen 2" width="200"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204985.jpg" alt="Screen 3" width="200"/>
+      </td>
+      <td>
+        <img src="https://github.com/AdeebAbubacker/chicking/blob/main/assets/common/1000204986.jpg" alt="Screen 4" width="200"/>
+      </td>
+    </tr>
+  </table>
+</div>
+
+---
 
 ### How to Run the App
 
