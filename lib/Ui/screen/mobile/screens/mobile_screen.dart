@@ -5,10 +5,13 @@ import 'package:ecommerce/Ui/screen/mobile/widgets/search_button.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/signup.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/social_media.dart';
 import 'package:ecommerce/Ui/widgets/dropdown_button.dart';
+import 'package:ecommerce/core/db/hive_db/adapters/category_adater/category_adapter.dart';
+import 'package:ecommerce/core/db/hive_db/boxes/category_box.dart';
 import 'package:ecommerce/core/view_model/categorySearch/category_search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MobileScreen extends StatefulWidget {
@@ -27,6 +30,7 @@ class _MobileScreenState extends State<MobileScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      CategoryBox = await Hive.openBox<CategoryDB>('CategoryBox');
       BlocProvider.of<CategorySearchBloc>(context)
           .add(const CategorySearchEvent.categorySearch(
         query: "All",
@@ -35,10 +39,18 @@ class _MobileScreenState extends State<MobileScreen> {
     });
   }
 
+ 
   int currentPage = 1; // Track the current page
   int totalPages = 1; // Track total pages
   @override
   Widget build(BuildContext context) {
+    // Fetch categories from Hive database
+  Future<List<CategoryDB>> _fetchCategoriesFromHive() async {
+  // Fetch the values from the CategoryBox and cast them to a List<CategoryDB>
+  return (CategoryBox.values.toList() as List<CategoryDB>);
+}
+
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -59,99 +71,144 @@ class _MobileScreenState extends State<MobileScreen> {
                   ),
                 ),
                 const Spacer(),
-                DropdownButtons(
-                  categoryItems: [
-                    CategoryItem(displayName: 'All', id: '1', slug: 'All'),
-                    CategoryItem(
-                        displayName: 'Beauty', id: '2', slug: 'beauty'),
-                    CategoryItem(
-                        displayName: 'Fragrances', id: '3', slug: 'fragrances'),
-                    CategoryItem(
-                        displayName: 'Furniture', id: '4', slug: 'furniture'),
-                    CategoryItem(
-                        displayName: 'Groceries', id: '5', slug: 'groceries'),
-                    CategoryItem(
-                        displayName: 'Home Decoration',
-                        id: '6',
-                        slug: 'home-decoration'),
-                    CategoryItem(
-                        displayName: 'Kitchen Accessories',
-                        id: '7',
-                        slug: 'kitchen-accessories'),
-                    CategoryItem(
-                        displayName: 'Laptops', id: '8', slug: 'laptops'),
-                    CategoryItem(
-                        displayName: 'Mens Shirts',
-                        id: '9',
-                        slug: 'mens-shirts'),
-                    CategoryItem(
-                        displayName: 'Mens Shoes',
-                        id: '10',
-                        slug: 'mens-shoes'),
-                    CategoryItem(
-                        displayName: 'Mens Watches',
-                        id: '11',
-                        slug: 'mens-watches'),
-                    CategoryItem(
-                        displayName: 'Mobile Accessories',
-                        id: '12',
-                        slug: 'mobile-accessories'),
-                    CategoryItem(
-                        displayName: 'Motorcycle',
-                        id: '13',
-                        slug: 'motorcycle'),
-                    CategoryItem(
-                        displayName: 'Skin Care', id: '14', slug: 'skin-care'),
-                    CategoryItem(
-                        displayName: 'Smartphones',
-                        id: '15',
-                        slug: 'smartphones'),
-                    CategoryItem(
-                        displayName: 'Sports Accessories',
-                        id: '16',
-                        slug: 'sports-accessories'),
-                    CategoryItem(
-                        displayName: 'Sunglasses',
-                        id: '17',
-                        slug: 'sunglasses'),
-                    CategoryItem(
-                        displayName: 'Tablets', id: '18', slug: 'tablets'),
-                    CategoryItem(displayName: 'Tops', id: '19', slug: 'tops'),
-                    CategoryItem(
-                        displayName: 'Vehicle', id: '20', slug: 'vehicle'),
-                    CategoryItem(
-                        displayName: 'Womens Bags',
-                        id: '21',
-                        slug: 'womens-bags'),
-                    CategoryItem(
-                        displayName: 'Womens Dresses',
-                        id: '22',
-                        slug: 'womens-dresses'),
-                    CategoryItem(
-                        displayName: 'Womens Jewellery',
-                        id: '23',
-                        slug: 'womens-jewellery'),
-                    CategoryItem(
-                        displayName: 'Womens Shoes',
-                        id: '24',
-                        slug: 'womens-shoes'),
-                    CategoryItem(
-                        displayName: 'Womens Watches',
-                        id: '25',
-                        slug: 'womens-watches'),
-                  ],
-                  onClassChanged: (CategoryItem? selectedItem) {
-                    selectedArmedForces = selectedItem;
-                    currentPage = 1;
-                    print(selectedArmedForces?.displayName);
-                    BlocProvider.of<CategorySearchBloc>(context)
-                        .add(CategorySearchEvent.categorySearch(
-                      query: selectedArmedForces!.slug,
-                      page: 1,
-                    ));
+                FutureBuilder<List<CategoryDB>>(
+                  future: _fetchCategoriesFromHive(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    if (snapshot.hasError) {
+                      return Text("Error: ${snapshot.error}");
+                    }
+
+                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Text('No Categories Available');
+                    }
+
+                    final categories = snapshot.data!;
+
+                    // Convert CategoryDB to CategoryItem
+                    final categoryItems = categories
+                        .map((category) => CategoryItem(
+                              displayName: category.name ?? 'Unknown',
+                              id: category.toString(),
+                              slug: category.slug ?? 'unknown',
+                            ))
+                        .toList();
+
+                    return DropdownButtons(
+                      categoryItems: categoryItems,
+                      onClassChanged: (CategoryItem? selectedItem) {
+                        selectedArmedForces = selectedItem;
+                        currentPage = 1;
+                        print(selectedArmedForces?.displayName);
+
+                        BlocProvider.of<CategorySearchBloc>(context).add(
+                          CategorySearchEvent.categorySearch(
+                            query: selectedArmedForces!.slug,
+                            page: 1,
+                          ),
+                        );
+                      },
+                      hinttext: 'Select Category',
+                    );
                   },
-                  hinttext: 'Select Category',
                 ),
+
+                // DropdownButtons(
+                //   categoryItems: [
+                //     CategoryItem(displayName: 'All', id: '1', slug: 'All'),
+                //     CategoryItem(
+                //         displayName: 'Beauty', id: '2', slug: 'beauty'),
+                //     CategoryItem(
+                //         displayName: 'Fragrances', id: '3', slug: 'fragrances'),
+                //     CategoryItem(
+                //         displayName: 'Furniture', id: '4', slug: 'furniture'),
+                //     CategoryItem(
+                //         displayName: 'Groceries', id: '5', slug: 'groceries'),
+                //     CategoryItem(
+                //         displayName: 'Home Decoration',
+                //         id: '6',
+                //         slug: 'home-decoration'),
+                //     CategoryItem(
+                //         displayName: 'Kitchen Accessories',
+                //         id: '7',
+                //         slug: 'kitchen-accessories'),
+                //     CategoryItem(
+                //         displayName: 'Laptops', id: '8', slug: 'laptops'),
+                //     CategoryItem(
+                //         displayName: 'Mens Shirts',
+                //         id: '9',
+                //         slug: 'mens-shirts'),
+                //     CategoryItem(
+                //         displayName: 'Mens Shoes',
+                //         id: '10',
+                //         slug: 'mens-shoes'),
+                //     CategoryItem(
+                //         displayName: 'Mens Watches',
+                //         id: '11',
+                //         slug: 'mens-watches'),
+                //     CategoryItem(
+                //         displayName: 'Mobile Accessories',
+                //         id: '12',
+                //         slug: 'mobile-accessories'),
+                //     CategoryItem(
+                //         displayName: 'Motorcycle',
+                //         id: '13',
+                //         slug: 'motorcycle'),
+                //     CategoryItem(
+                //         displayName: 'Skin Care', id: '14', slug: 'skin-care'),
+                //     CategoryItem(
+                //         displayName: 'Smartphones',
+                //         id: '15',
+                //         slug: 'smartphones'),
+                //     CategoryItem(
+                //         displayName: 'Sports Accessories',
+                //         id: '16',
+                //         slug: 'sports-accessories'),
+                //     CategoryItem(
+                //         displayName: 'Sunglasses',
+                //         id: '17',
+                //         slug: 'sunglasses'),
+                //     CategoryItem(
+                //         displayName: 'Tablets', id: '18', slug: 'tablets'),
+                //     CategoryItem(displayName: 'Tops', id: '19', slug: 'tops'),
+                //     CategoryItem(
+                //         displayName: 'Vehicle', id: '20', slug: 'vehicle'),
+                //     CategoryItem(
+                //         displayName: 'Womens Bags',
+                //         id: '21',
+                //         slug: 'womens-bags'),
+                //     CategoryItem(
+                //         displayName: 'Womens Dresses',
+                //         id: '22',
+                //         slug: 'womens-dresses'),
+                //     CategoryItem(
+                //         displayName: 'Womens Jewellery',
+                //         id: '23',
+                //         slug: 'womens-jewellery'),
+                //     CategoryItem(
+                //         displayName: 'Womens Shoes',
+                //         id: '24',
+                //         slug: 'womens-shoes'),
+                //     CategoryItem(
+                //         displayName: 'Womens Watches',
+                //         id: '25',
+                //         slug: 'womens-watches'),
+                //   ],
+                //   onClassChanged: (CategoryItem? selectedItem) {
+                //     selectedArmedForces = selectedItem;
+                //     currentPage = 1;
+                //     print(selectedArmedForces?.displayName);
+                //     BlocProvider.of<CategorySearchBloc>(context)
+                //         .add(CategorySearchEvent.categorySearch(
+                //       query: selectedArmedForces!.slug,
+                //       page: 1,
+                //     ));
+                //   },
+                //   hinttext: 'Select Category',
+                // ),
               ],
             ),
             const SizedBox(height: 30),
@@ -333,52 +390,140 @@ class _MobileScreenState extends State<MobileScreen> {
                           children: [
                             // Previous Button
                             IconButton(
-                                onPressed: currentPage > 1
-                                    ? () {
-                                        setState(() {
-                                          currentPage--;
-                                        });
-                                        // Call the Bloc event with the previous page
-                                        BlocProvider.of<CategorySearchBloc>(
-                                                context)
-                                            .add(
-                                          CategorySearchEvent.categorySearch(
-                                            query: selectedArmedForces?.slug ?? "All",
-                                            page: currentPage,
-                                          ),
-                                        );
-                                      }
-                                    : null,
-                                icon: Icon(Icons.arrow_back_ios)),
+                              onPressed: currentPage > 1
+                                  ? () {
+                                      setState(() {
+                                        currentPage--;
+                                      });
+                                      // Call the Bloc event with the previous page
+                                      BlocProvider.of<CategorySearchBloc>(
+                                              context)
+                                          .add(
+                                        CategorySearchEvent.categorySearch(
+                                          query: selectedArmedForces?.slug ??
+                                              "All",
+                                          page: currentPage,
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              icon: Icon(Icons.arrow_back_ios),
+                            ),
 
-                            // Page Indicator
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20.0),
-                              child: Text("Page $currentPage of $totalPages"),
+                            // Page Number Buttons
+                            Wrap(
+                              spacing:
+                                  5.0, // Adjust spacing between buttons as needed
+                              children: List.generate(
+                                  totalPages,
+                                  (index) => TextButton(
+                                        onPressed: () {
+                                          if (index != currentPage - 1) {
+                                            setState(() {
+                                              currentPage = index + 1;
+                                            });
+                                            // Call the Bloc event with the selected page
+                                            BlocProvider.of<CategorySearchBloc>(
+                                                    context)
+                                                .add(
+                                              CategorySearchEvent
+                                                  .categorySearch(
+                                                query:
+                                                    selectedArmedForces?.slug ??
+                                                        "All",
+                                                page: currentPage,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Text(
+                                          "${index + 1}", // Display page numbers starting from 1
+                                          style: TextStyle(
+                                            color: currentPage == index + 1
+                                                ? Colors.red
+                                                : Colors
+                                                    .black, // Highlight current page
+                                          ),
+                                        ),
+                                      )),
                             ),
 
                             // Next Button
                             IconButton(
-                                onPressed: currentPage < totalPages
-                                    ? () {
-                                        setState(() {
-                                          currentPage++;
-                                        });
-                                        // Call the Bloc event with the next page
-                                        BlocProvider.of<CategorySearchBloc>(
-                                                context)
-                                            .add(
-                                          CategorySearchEvent.categorySearch(
-                                            query: selectedArmedForces?.slug ?? "All",
-                                            page: currentPage,
-                                          ),
-                                        );
-                                      }
-                                    : null, // Disable if on the last page
-                                icon: Icon(Icons.arrow_forward_ios)),
+                              onPressed: currentPage < totalPages
+                                  ? () {
+                                      setState(() {
+                                        currentPage++;
+                                      });
+                                      // Call the Bloc event with the next page
+                                      BlocProvider.of<CategorySearchBloc>(
+                                              context)
+                                          .add(
+                                        CategorySearchEvent.categorySearch(
+                                          query: selectedArmedForces?.slug ??
+                                              "All",
+                                          page: currentPage,
+                                        ),
+                                      );
+                                    }
+                                  : null,
+                              icon: Icon(Icons.arrow_forward_ios),
+                            ),
                           ],
                         ),
+
+                      // if (totalPages > 1)
+                      //   Row(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       // Previous Button
+                      //       IconButton(
+                      //           onPressed: currentPage > 1
+                      //               ? () {
+                      //                   setState(() {
+                      //                     currentPage--;
+                      //                   });
+                      //                   // Call the Bloc event with the previous page
+                      //                   BlocProvider.of<CategorySearchBloc>(
+                      //                           context)
+                      //                       .add(
+                      //                     CategorySearchEvent.categorySearch(
+                      //                       query: selectedArmedForces?.slug ?? "All",
+                      //                       page: currentPage,
+                      //                     ),
+                      //                   );
+                      //                 }
+                      //               : null,
+                      //           icon: Icon(Icons.arrow_back_ios)),
+
+                      //       // Page Indicator
+                      //       Padding(
+                      //         padding:
+                      //             const EdgeInsets.symmetric(horizontal: 20.0),
+                      //         child: Text("Page $currentPage of $totalPages"),
+                      //       ),
+
+                      //       // Next Button
+                      //       IconButton(
+                      //           onPressed: currentPage < totalPages
+                      //               ? () {
+                      //                   setState(() {
+                      //                     currentPage++;
+                      //                   });
+                      //                   // Call the Bloc event with the next page
+                      //                   BlocProvider.of<CategorySearchBloc>(
+                      //                           context)
+                      //                       .add(
+                      //                     CategorySearchEvent.categorySearch(
+                      //                       query: selectedArmedForces?.slug ?? "All",
+                      //                       page: currentPage,
+                      //                     ),
+                      //                   );
+                      //                 }
+                      //               : null, // Disable if on the last page
+                      //           icon: Icon(Icons.arrow_forward_ios)),
+                      //     ],
+                      //   ),
                     ]);
                   },
                   loading: (value) {

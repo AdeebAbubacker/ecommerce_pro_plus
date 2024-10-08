@@ -1,6 +1,4 @@
 import 'package:ecommerce/core/view_model/categorySearch/category_search_bloc.dart';
-import 'package:ecommerce/core/view_model/productCategory/productscategory_bloc.dart';
-import 'package:ecommerce/core/view_model/searchproducts/search_products_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
