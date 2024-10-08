@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'dart:async';
-import 'package:device_preview/device_preview.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/promotional_banner.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/search_button.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/signup.dart';
