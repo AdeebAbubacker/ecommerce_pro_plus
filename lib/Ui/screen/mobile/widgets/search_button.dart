@@ -33,6 +33,7 @@ class SearchButton extends StatelessWidget {
             Text(
               'What do you want to buy today?',
               style: GoogleFonts.poppins(
+                fontSize: 12,
                 color: const Color.fromARGB(255, 122, 122, 122),
               ),
             ),

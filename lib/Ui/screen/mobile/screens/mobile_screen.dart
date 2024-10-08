@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
+import 'dart:async';
+
 import 'package:ecommerce/Ui/screen/mobile/widgets/promotional_banner.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/search_button.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/signup.dart';
@@ -25,7 +27,7 @@ class MobileScreen extends StatefulWidget {
 
 class _MobileScreenState extends State<MobileScreen> {
   CategoryItem? selectedArmedForces =
-      CategoryItem(displayName: "All", id: "1", slug: "all");
+      CategoryItem(displayName: "All", id: "1", slug: "All");
 
   @override
   void initState() {
@@ -60,7 +62,7 @@ class _MobileScreenState extends State<MobileScreen> {
           loading: (value) {},
           success: (value) async {
             // for (var i = 0; i < value.getProducts.length; i++) {
-            //   await CategoryBox.put(
+            //   await all.put(
             //     i,
             //     CategoryDB(
             //       name: value.getProducts[i].name, // Store name
@@ -150,7 +152,6 @@ class _MobileScreenState extends State<MobileScreen> {
                         onClassChanged: (CategoryItem? selectedItem) {
                           selectedArmedForces = selectedItem;
                           currentPage = 1;
-                          print(selectedArmedForces?.displayName);
 
                           BlocProvider.of<CategorySearchBloc>(context).add(
                             CategorySearchEvent.categorySearch(
@@ -172,15 +173,19 @@ class _MobileScreenState extends State<MobileScreen> {
                 builder: (context, state) {
                   return state.maybeMap(
                     orElse: () {
+                      print("error");
                       return const Text("Error");
                     },
                     failure: (value) {
+                      print(value);
                       return const Text("Error");
                     },
                     initial: (value) {
+                      print(value);
                       return const Text("Error");
                     },
                     success: (value) {
+                      print(value);
                       // Ensure total is not null
                       int totalItems = value.categorySearch.total ??
                           0; // Use a default value of 0 if null
@@ -234,7 +239,10 @@ class _MobileScreenState extends State<MobileScreen> {
                                                 topRight: Radius.circular(9),
                                               ),
                                               child: Image.network(
-                                                '${value.categorySearch.products![index].images![0]}',
+                                                value
+                                                    .categorySearch
+                                                    .products![index]
+                                                    .images![0],
                                                 height: 190,
                                                 width: double.infinity,
                                                 fit: BoxFit.cover,
@@ -341,7 +349,7 @@ class _MobileScreenState extends State<MobileScreen> {
                             );
                           },
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         if (totalPages > 1)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -385,7 +393,7 @@ class _MobileScreenState extends State<MobileScreen> {
                                           );
                                         }
                                       : null,
-                                  icon: Icon(Icons.arrow_back_ios)),
+                                  icon: const Icon(Icons.arrow_back_ios)),
 
                               Container(
                                 decoration: BoxDecoration(
@@ -436,12 +444,13 @@ class _MobileScreenState extends State<MobileScreen> {
                                           // Call the Bloc event with the next page
                                         }
                                       : null, // Disable if on the last page
-                                  icon: Icon(Icons.arrow_forward_ios)),
+                                  icon: const Icon(Icons.arrow_forward_ios)),
                             ],
                           ),
                       ]);
                     },
                     loading: (value) {
+                      print(value);
                       return GridView.builder(
                         padding: const EdgeInsets.all(0),
                         physics: const NeverScrollableScrollPhysics(),
@@ -553,6 +562,10 @@ class _MobileScreenState extends State<MobileScreen> {
                           );
                         },
                       );
+                    },
+                    noInternet: (value) {
+                      print(value);
+                      return Text("No Internt Please Try again");
                     },
                   );
                 },

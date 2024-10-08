@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -43,9 +44,17 @@ class SocialMedia extends StatelessWidget {
             const SizedBox(width: 10),
             _buildSocialIcon(Icons.notifications),
             Spacer(),
-            const Icon(FontAwesomeIcons.android),
+            SvgPicture.asset(
+              "assets/android.svg",
+              width: 25, // Adjust the width as per your design
+              height: 25, // Adjust the height as per your design
+            ),
             const SizedBox(width: 10),
-            const Icon(FontAwesomeIcons.apple)
+            SvgPicture.asset(
+              "assets/apple.svg",
+              width: 25, // Adjust the width as per your design
+              height: 25, // Adjust the height as per your design
+            ),
           ],
         )
       ],

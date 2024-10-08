@@ -15,7 +15,11 @@ class ProductscategoryBloc
       final response = await ProductService.fetchCategories();
 
       response.fold((failure) {
-        emit(ProductscategoryState.failure(failure.toString()));
+        if (failure == "No Internet") {
+          emit(const ProductscategoryState.noInternet());
+        } else {
+          emit(ProductscategoryState.failure(failure.toString()));
+        }
       }, (success) {
         emit(ProductscategoryState.success(success));
       });

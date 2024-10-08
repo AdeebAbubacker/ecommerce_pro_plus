@@ -6,5 +6,6 @@ class SearchProductsState with _$SearchProductsState {
   const factory SearchProductsState.loading() = _Loading;
   const factory SearchProductsState.success(
       SearchProductsModel getProducts) = _Success;
+       const factory SearchProductsState.noInternet() = _NoInternet;
   const factory SearchProductsState.failure(String error) = _Failure;
 }

@@ -341,6 +341,7 @@ mixin _$CategorySearchState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CategorySearch categorySearch) success,
+    required TResult Function() noInternet,
     required TResult Function(String error) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -349,6 +350,7 @@ mixin _$CategorySearchState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CategorySearch categorySearch)? success,
+    TResult? Function()? noInternet,
     TResult? Function(String error)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -357,6 +359,7 @@ mixin _$CategorySearchState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CategorySearch categorySearch)? success,
+    TResult Function()? noInternet,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) =>
@@ -366,6 +369,7 @@ mixin _$CategorySearchState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_NoInternet value) noInternet,
     required TResult Function(_Failure value) failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -374,6 +378,7 @@ mixin _$CategorySearchState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_NoInternet value)? noInternet,
     TResult? Function(_Failure value)? failure,
   }) =>
       throw _privateConstructorUsedError;
@@ -382,6 +387,7 @@ mixin _$CategorySearchState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_NoInternet value)? noInternet,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) =>
@@ -453,6 +459,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CategorySearch categorySearch) success,
+    required TResult Function() noInternet,
     required TResult Function(String error) failure,
   }) {
     return initial();
@@ -464,6 +471,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CategorySearch categorySearch)? success,
+    TResult? Function()? noInternet,
     TResult? Function(String error)? failure,
   }) {
     return initial?.call();
@@ -475,6 +483,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CategorySearch categorySearch)? success,
+    TResult Function()? noInternet,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -490,6 +499,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_NoInternet value) noInternet,
     required TResult Function(_Failure value) failure,
   }) {
     return initial(this);
@@ -501,6 +511,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_NoInternet value)? noInternet,
     TResult? Function(_Failure value)? failure,
   }) {
     return initial?.call(this);
@@ -512,6 +523,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_NoInternet value)? noInternet,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -570,6 +582,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CategorySearch categorySearch) success,
+    required TResult Function() noInternet,
     required TResult Function(String error) failure,
   }) {
     return loading();
@@ -581,6 +594,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CategorySearch categorySearch)? success,
+    TResult? Function()? noInternet,
     TResult? Function(String error)? failure,
   }) {
     return loading?.call();
@@ -592,6 +606,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CategorySearch categorySearch)? success,
+    TResult Function()? noInternet,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -607,6 +622,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_NoInternet value) noInternet,
     required TResult Function(_Failure value) failure,
   }) {
     return loading(this);
@@ -618,6 +634,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_NoInternet value)? noInternet,
     TResult? Function(_Failure value)? failure,
   }) {
     return loading?.call(this);
@@ -629,6 +646,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_NoInternet value)? noInternet,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -715,6 +733,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CategorySearch categorySearch) success,
+    required TResult Function() noInternet,
     required TResult Function(String error) failure,
   }) {
     return success(categorySearch);
@@ -726,6 +745,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CategorySearch categorySearch)? success,
+    TResult? Function()? noInternet,
     TResult? Function(String error)? failure,
   }) {
     return success?.call(categorySearch);
@@ -737,6 +757,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CategorySearch categorySearch)? success,
+    TResult Function()? noInternet,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -752,6 +773,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_NoInternet value) noInternet,
     required TResult Function(_Failure value) failure,
   }) {
     return success(this);
@@ -763,6 +785,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_NoInternet value)? noInternet,
     TResult? Function(_Failure value)? failure,
   }) {
     return success?.call(this);
@@ -774,6 +797,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_NoInternet value)? noInternet,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {
@@ -794,6 +818,129 @@ abstract class _Success implements CategorySearchState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$NoInternetImplCopyWith<$Res> {
+  factory _$$NoInternetImplCopyWith(
+          _$NoInternetImpl value, $Res Function(_$NoInternetImpl) then) =
+      __$$NoInternetImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NoInternetImplCopyWithImpl<$Res>
+    extends _$CategorySearchStateCopyWithImpl<$Res, _$NoInternetImpl>
+    implements _$$NoInternetImplCopyWith<$Res> {
+  __$$NoInternetImplCopyWithImpl(
+      _$NoInternetImpl _value, $Res Function(_$NoInternetImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CategorySearchState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$NoInternetImpl implements _NoInternet {
+  const _$NoInternetImpl();
+
+  @override
+  String toString() {
+    return 'CategorySearchState.noInternet()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NoInternetImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(CategorySearch categorySearch) success,
+    required TResult Function() noInternet,
+    required TResult Function(String error) failure,
+  }) {
+    return noInternet();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(CategorySearch categorySearch)? success,
+    TResult? Function()? noInternet,
+    TResult? Function(String error)? failure,
+  }) {
+    return noInternet?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(CategorySearch categorySearch)? success,
+    TResult Function()? noInternet,
+    TResult Function(String error)? failure,
+    required TResult orElse(),
+  }) {
+    if (noInternet != null) {
+      return noInternet();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_NoInternet value) noInternet,
+    required TResult Function(_Failure value) failure,
+  }) {
+    return noInternet(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Success value)? success,
+    TResult? Function(_NoInternet value)? noInternet,
+    TResult? Function(_Failure value)? failure,
+  }) {
+    return noInternet?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_NoInternet value)? noInternet,
+    TResult Function(_Failure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (noInternet != null) {
+      return noInternet(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NoInternet implements CategorySearchState {
+  const factory _NoInternet() = _$NoInternetImpl;
 }
 
 /// @nodoc
@@ -867,6 +1014,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CategorySearch categorySearch) success,
+    required TResult Function() noInternet,
     required TResult Function(String error) failure,
   }) {
     return failure(error);
@@ -878,6 +1026,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CategorySearch categorySearch)? success,
+    TResult? Function()? noInternet,
     TResult? Function(String error)? failure,
   }) {
     return failure?.call(error);
@@ -889,6 +1038,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CategorySearch categorySearch)? success,
+    TResult Function()? noInternet,
     TResult Function(String error)? failure,
     required TResult orElse(),
   }) {
@@ -904,6 +1054,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_NoInternet value) noInternet,
     required TResult Function(_Failure value) failure,
   }) {
     return failure(this);
@@ -915,6 +1066,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
+    TResult? Function(_NoInternet value)? noInternet,
     TResult? Function(_Failure value)? failure,
   }) {
     return failure?.call(this);
@@ -926,6 +1078,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_NoInternet value)? noInternet,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
   }) {

@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/const/text_style.dart';
 import 'package:flutter/material.dart';
 
 class WebScreen extends StatelessWidget {
@@ -5,10 +6,19 @@ class WebScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [Text("Web Screen")],
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Web Platform Currently Not vailable",
+                style: TextStyles.poppins14Colorw400,
+              ),
+            ],
+          ),
         ),
       ),
     );

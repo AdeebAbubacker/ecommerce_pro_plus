@@ -6,5 +6,6 @@ class CategorySearchState with _$CategorySearchState {
   const factory CategorySearchState.loading() = _Loading;
   const factory CategorySearchState.success(CategorySearch categorySearch) =
       _Success;
+  const factory CategorySearchState.noInternet() = _NoInternet;
   const factory CategorySearchState.failure(String error) = _Failure;
 }

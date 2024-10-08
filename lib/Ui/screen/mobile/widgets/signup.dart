@@ -75,7 +75,7 @@ class Signup extends StatelessWidget {
         const Center(
           child: Wrap(
             alignment: WrapAlignment.center, // Center align the items
-            spacing: 10.0, // Space between items in the wrap
+            spacing: 5.0, // Space between items in the wrap
             children: [
               Text(
                 "Privacy Center",

@@ -16,7 +16,11 @@ class SearchProductsBloc
           await ProductService.searchProducts(query: event.keyword);
 
       response.fold((failure) {
-        emit(SearchProductsState.failure(failure.toString()));
+        if (failure == "No Internet") {
+          emit(const SearchProductsState.noInternet());
+        } else {
+          emit(SearchProductsState.failure(failure.toString()));
+        }
       }, (success) {
         emit(SearchProductsState.success(success));
       });

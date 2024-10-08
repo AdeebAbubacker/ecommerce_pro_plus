@@ -19,7 +19,11 @@ class CategorySearchBloc
       );
 
       response.fold((failure) {
-        emit(CategorySearchState.failure(failure.toString()));
+         if (failure == "No Internet") {
+          emit(const CategorySearchState.noInternet());
+        } else {
+          emit(CategorySearchState.failure(failure.toString()));
+        }
       }, (success) {
         emit(CategorySearchState.success(success));
       });

@@ -6,10 +6,12 @@ import 'package:ecommerce/core/db/hive_db/boxes/category_box.dart';
 import 'package:ecommerce/core/view_model/categorySearch/category_search_bloc.dart';
 import 'package:ecommerce/core/view_model/productCategory/productscategory_bloc.dart';
 import 'package:ecommerce/core/view_model/searchproducts/search_products_bloc.dart';
+import 'package:ecommerce/test/test_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const SplashScreen(),
+        home: const TestScreen(),
       ),
     );
   }
@@ -82,15 +84,18 @@ class MyHomePage extends StatelessWidget {
             ],
           ),
           child: AppBar(
-            leading: Image.asset(
-              "assets/menu_icon.png",
-              width: 4,
-              height: 4,
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                "assets/menu (5).svg",
+                width: 12, // Adjust the width as per your design
+                height: 12, // Adjust the height as per your design
+              ),
             ),
             backgroundColor: Colors.white, // Set AppBar color to white
             foregroundColor: Colors.black, // Icon and text color
             title: Image.asset(
-              "assets/moboom_logo.png",
+              "assets/Moboom.jpg",
               width: 170,
             ),
             centerTitle: true,
