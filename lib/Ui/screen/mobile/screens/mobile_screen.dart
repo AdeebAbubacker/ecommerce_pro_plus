@@ -353,6 +353,10 @@ class _MobileScreenState extends State<MobileScreen> {
                                           setState(() {
                                             if (currentPage > 1) {
                                               currentPage--;
+                                              print(
+                                                  'Current page ${currentPage}');
+                                              print(
+                                                  'query ${selectedArmedForces?.slug}');
                                               BlocProvider.of<
                                                           CategorySearchBloc>(
                                                       context)
@@ -413,6 +417,10 @@ class _MobileScreenState extends State<MobileScreen> {
                                       ? () {
                                           setState(() {
                                             currentPage++;
+                                            print(
+                                                'Current page ${currentPage}');
+                                            print(
+                                                'query ${selectedArmedForces?.slug}');
                                             BlocProvider.of<CategorySearchBloc>(
                                                     context)
                                                 .add(
