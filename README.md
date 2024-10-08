@@ -1,6 +1,6 @@
 # MoBooM
 
-This app has been developed specifically for the Android platform using Flutter, Flame, and Forge2D.
+MoBooM is an e-commerce app that provides users with a seamless shopping experience. It allows users to search for products, filter them based on categories, and view a list of all available products.
 
 ## App Screenshot
 
@@ -17,8 +17,6 @@ To run the app on your Android device, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/AdeebAbubacker/dino_dash
-   cd dino_dash
-   rm -rf build
-   flutter create .
+   git clone https://github.com/AdeebAbubacker/ecommerce_pro_plus
+   cd ecommerce_pro_plus
    flutter run -d android
