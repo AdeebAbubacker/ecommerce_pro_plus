@@ -29,10 +29,20 @@ class _SplashScreenState extends State<SplashScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       BlocProvider.of<ProductscategoryBloc>(context)
           .add(const ProductscategoryEvent.getProductsCategory());
+      Future.delayed(
+        Duration(seconds: 3),
+        () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return const MyHomePage();
+            },
+          ));
+        },
+      );
     });
     // Initialize the animation controller
     _controller = AnimationController(
-      duration: const Duration(seconds: 4),
+      duration: const Duration(milliseconds: 2500),
       vsync: this,
     )..forward();
 
@@ -101,11 +111,6 @@ class _SplashScreenState extends State<SplashScreen>
               print(
                   'Category $i: Name - ${category?.name}, Slug - ${category?.slug}');
             }
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) {
-                return const MyHomePage();
-              },
-            ));
           },
         );
       },

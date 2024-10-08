@@ -32,7 +32,8 @@ class _DropdownButtonsState extends State<DropdownButtons> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                item.displayName, // Display the class name
+                truncateWithEllipsis(
+                    19, item.displayName), // Display the class name
                 style: GoogleFonts.poppins(
                   fontSize: 11,
                   color: Colors.black,
@@ -118,6 +119,10 @@ class _DropdownButtonsState extends State<DropdownButtons> {
       ),
     );
   }
+
+  String truncateWithEllipsis(int cutoff, String text) {
+    return (text.length <= cutoff) ? text : '${text.substring(0, cutoff)}...';
+  }
 }
 
 class CategoryItem {
@@ -135,9 +140,7 @@ class CategoryItem {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is CategoryItem &&
-        other.id == id &&
-        other.slug == slug;
+    return other is CategoryItem && other.id == id && other.slug == slug;
   }
 
   @override

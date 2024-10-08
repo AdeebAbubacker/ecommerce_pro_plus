@@ -5,6 +5,7 @@ import 'package:ecommerce/Ui/screen/mobile/widgets/search_button.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/signup.dart';
 import 'package:ecommerce/Ui/screen/mobile/widgets/social_media.dart';
 import 'package:ecommerce/Ui/widgets/dropdown_button.dart';
+import 'package:ecommerce/core/const/text_style.dart';
 import 'package:ecommerce/core/db/hive_db/adapters/category_adater/category_adapter.dart';
 import 'package:ecommerce/core/db/hive_db/boxes/category_box.dart';
 import 'package:ecommerce/core/view_model/categorySearch/category_search_bloc.dart';
@@ -52,7 +53,7 @@ class _MobileScreenState extends State<MobileScreen> {
 
     return BlocListener<ProductscategoryBloc, ProductscategoryState>(
       listener: (context, state) {
-      state.maybeMap(
+        state.maybeMap(
           orElse: () {},
           failure: (value) {},
           initial: (value) {},
@@ -95,7 +96,6 @@ class _MobileScreenState extends State<MobileScreen> {
               print(
                   'Category $i: Name - ${category?.name}, Slug - ${category?.slug}');
             }
-         
           },
         );
       },
@@ -163,100 +163,6 @@ class _MobileScreenState extends State<MobileScreen> {
                       );
                     },
                   ),
-
-                  // DropdownButtons(
-                  //   categoryItems: [
-                  //     CategoryItem(displayName: 'All', id: '1', slug: 'All'),
-                  //     CategoryItem(
-                  //         displayName: 'Beauty', id: '2', slug: 'beauty'),
-                  //     CategoryItem(
-                  //         displayName: 'Fragrances', id: '3', slug: 'fragrances'),
-                  //     CategoryItem(
-                  //         displayName: 'Furniture', id: '4', slug: 'furniture'),
-                  //     CategoryItem(
-                  //         displayName: 'Groceries', id: '5', slug: 'groceries'),
-                  //     CategoryItem(
-                  //         displayName: 'Home Decoration',
-                  //         id: '6',
-                  //         slug: 'home-decoration'),
-                  //     CategoryItem(
-                  //         displayName: 'Kitchen Accessories',
-                  //         id: '7',
-                  //         slug: 'kitchen-accessories'),
-                  //     CategoryItem(
-                  //         displayName: 'Laptops', id: '8', slug: 'laptops'),
-                  //     CategoryItem(
-                  //         displayName: 'Mens Shirts',
-                  //         id: '9',
-                  //         slug: 'mens-shirts'),
-                  //     CategoryItem(
-                  //         displayName: 'Mens Shoes',
-                  //         id: '10',
-                  //         slug: 'mens-shoes'),
-                  //     CategoryItem(
-                  //         displayName: 'Mens Watches',
-                  //         id: '11',
-                  //         slug: 'mens-watches'),
-                  //     CategoryItem(
-                  //         displayName: 'Mobile Accessories',
-                  //         id: '12',
-                  //         slug: 'mobile-accessories'),
-                  //     CategoryItem(
-                  //         displayName: 'Motorcycle',
-                  //         id: '13',
-                  //         slug: 'motorcycle'),
-                  //     CategoryItem(
-                  //         displayName: 'Skin Care', id: '14', slug: 'skin-care'),
-                  //     CategoryItem(
-                  //         displayName: 'Smartphones',
-                  //         id: '15',
-                  //         slug: 'smartphones'),
-                  //     CategoryItem(
-                  //         displayName: 'Sports Accessories',
-                  //         id: '16',
-                  //         slug: 'sports-accessories'),
-                  //     CategoryItem(
-                  //         displayName: 'Sunglasses',
-                  //         id: '17',
-                  //         slug: 'sunglasses'),
-                  //     CategoryItem(
-                  //         displayName: 'Tablets', id: '18', slug: 'tablets'),
-                  //     CategoryItem(displayName: 'Tops', id: '19', slug: 'tops'),
-                  //     CategoryItem(
-                  //         displayName: 'Vehicle', id: '20', slug: 'vehicle'),
-                  //     CategoryItem(
-                  //         displayName: 'Womens Bags',
-                  //         id: '21',
-                  //         slug: 'womens-bags'),
-                  //     CategoryItem(
-                  //         displayName: 'Womens Dresses',
-                  //         id: '22',
-                  //         slug: 'womens-dresses'),
-                  //     CategoryItem(
-                  //         displayName: 'Womens Jewellery',
-                  //         id: '23',
-                  //         slug: 'womens-jewellery'),
-                  //     CategoryItem(
-                  //         displayName: 'Womens Shoes',
-                  //         id: '24',
-                  //         slug: 'womens-shoes'),
-                  //     CategoryItem(
-                  //         displayName: 'Womens Watches',
-                  //         id: '25',
-                  //         slug: 'womens-watches'),
-                  //   ],
-                  //   onClassChanged: (CategoryItem? selectedItem) {
-                  //     selectedArmedForces = selectedItem;
-                  //     currentPage = 1;
-                  //     print(selectedArmedForces?.displayName);
-                  //     BlocProvider.of<CategorySearchBloc>(context)
-                  //         .add(CategorySearchEvent.categorySearch(
-                  //       query: selectedArmedForces!.slug,
-                  //       page: 1,
-                  //     ));
-                  //   },
-                  //   hinttext: 'Select Category',
-                  // ),
                 ],
               ),
               const SizedBox(height: 30),
@@ -373,9 +279,11 @@ class _MobileScreenState extends State<MobileScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          value.categorySearch.products![index]
-                                              .title
-                                              .toString(),
+                                          truncateWithEllipsis(
+                                              25,
+                                              value.categorySearch
+                                                  .products![index].title
+                                                  .toString()),
                                           style: GoogleFonts.poppins(
                                             color: const Color.fromARGB(
                                                 255, 88, 88, 88),
@@ -443,8 +351,23 @@ class _MobileScreenState extends State<MobileScreen> {
                                   onPressed: currentPage > 1
                                       ? () {
                                           setState(() {
-                                            currentPage--;
+                                            if (currentPage > 1) {
+                                              currentPage--;
+                                              BlocProvider.of<
+                                                          CategorySearchBloc>(
+                                                      context)
+                                                  .add(
+                                                CategorySearchEvent
+                                                    .categorySearch(
+                                                  query: selectedArmedForces
+                                                          ?.slug ??
+                                                      "All",
+                                                  page: currentPage,
+                                                ),
+                                              );
+                                            }
                                           });
+
                                           // Call the Bloc event with the previous page
                                           BlocProvider.of<CategorySearchBloc>(
                                                   context)
@@ -478,7 +401,10 @@ class _MobileScreenState extends State<MobileScreen> {
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0),
-                                child: Text("Page $currentPage of $totalPages"),
+                                child: Text(
+                                  "Page $currentPage of $totalPages",
+                                  style: TextStyles.poppins14Colorw400,
+                                ),
                               ),
 
                               // Next Button
@@ -487,18 +413,19 @@ class _MobileScreenState extends State<MobileScreen> {
                                       ? () {
                                           setState(() {
                                             currentPage++;
+                                            BlocProvider.of<CategorySearchBloc>(
+                                                    context)
+                                                .add(
+                                              CategorySearchEvent
+                                                  .categorySearch(
+                                                query:
+                                                    selectedArmedForces?.slug ??
+                                                        "All",
+                                                page: currentPage,
+                                              ),
+                                            );
                                           });
                                           // Call the Bloc event with the next page
-                                          BlocProvider.of<CategorySearchBloc>(
-                                                  context)
-                                              .add(
-                                            CategorySearchEvent.categorySearch(
-                                              query:
-                                                  selectedArmedForces?.slug ??
-                                                      "All",
-                                              page: currentPage,
-                                            ),
-                                          );
                                         }
                                       : null, // Disable if on the last page
                                   icon: Icon(Icons.arrow_forward_ios)),
@@ -632,5 +559,9 @@ class _MobileScreenState extends State<MobileScreen> {
         ),
       ),
     );
+  }
+
+  String truncateWithEllipsis(int cutoff, String text) {
+    return (text.length <= cutoff) ? text : '${text.substring(0, cutoff)}...';
   }
 }
