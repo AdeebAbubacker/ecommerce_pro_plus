@@ -1,5 +1,6 @@
 // ignore_for_file: collection_methods_unrelated_type
 
+import 'package:ecommerce/core/const/text_style.dart';
 import 'package:ecommerce/core/models/food_model/food_model.dart';
 import 'package:ecommerce/core/models/search_products_model/product.dart';
 import 'package:ecommerce/core/models/search_products_model/search_products_model.dart';
@@ -388,7 +389,14 @@ class ProductSearchDelegate extends SearchDelegate {
           },
           loading: (value) => const Center(child: CircularProgressIndicator()),
           noInternet: (value) {
-            return Text("No Internt Please Try again");
+            return Center(
+                child: SizedBox(
+                    height: 200,
+                    child: Center(
+                        child: Text(
+                      "No Internet Please Try again!",
+                      style: TextStyles.poppins14Colorw400,
+                    ))));
           },
         );
       },

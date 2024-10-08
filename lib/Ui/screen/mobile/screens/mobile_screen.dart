@@ -565,7 +565,14 @@ class _MobileScreenState extends State<MobileScreen> {
                     },
                     noInternet: (value) {
                       print(value);
-                      return Text("No Internt Please Try again");
+                      return Center(
+                          child: SizedBox(
+                              height: 200,
+                              child: Center(
+                                  child: Text(
+                                "No Internet Please Try again!",
+                                style: TextStyles.poppins14Colorw400,
+                              ))));
                     },
                   );
                 },
